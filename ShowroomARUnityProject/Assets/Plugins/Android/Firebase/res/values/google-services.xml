@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://garagear-ceb8c.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">47329205487</string>
+  <string name="google_storage_bucket" translatable="false">garagear-ceb8c.appspot.com</string>
+  <string name="project_id" translatable="false">garagear-ceb8c</string>
+  <string name="google_api_key" translatable="false">AIzaSyAXuooGcW8WPZ7-lo15ceczinWjDr1Yu9w</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAXuooGcW8WPZ7-lo15ceczinWjDr1Yu9w</string>
+  <string name="google_app_id" translatable="false">1:47329205487:android:0430370c6ce3e12b3f0f1a</string>
+  <string name="default_web_client_id" translatable="false">47329205487-8b2q41e4sdoq50m44i7r0o5n508001k0.apps.googleusercontent.com</string>
+</resources>

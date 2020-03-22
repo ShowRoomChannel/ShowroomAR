@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "47329205487",
+    "firebase_url": "https://garagear-ceb8c.firebaseio.com",
+    "project_id": "garagear-ceb8c",
+    "storage_bucket": "garagear-ceb8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47329205487:android:0430370c6ce3e12b3f0f1a",
+        "android_client_info": {
+          "package_name": "com.f47il.garageAR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47329205487-8b2q41e4sdoq50m44i7r0o5n508001k0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXuooGcW8WPZ7-lo15ceczinWjDr1Yu9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47329205487-8b2q41e4sdoq50m44i7r0o5n508001k0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
