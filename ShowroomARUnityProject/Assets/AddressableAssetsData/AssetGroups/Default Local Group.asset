@@ -16,7 +16,14 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 3ef56e969921c5b4eb21b89a3a3a489d
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 602eada2ab36fd24cb241a881325ab10
+    m_Address: Assets/VehicleAssets/CyberTruck/Prefabs/cyberTruck_separate_centered_wheels_test#4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8db89d941a530514a90a86db9faba1bb, type: 2}
   m_SchemaSet:

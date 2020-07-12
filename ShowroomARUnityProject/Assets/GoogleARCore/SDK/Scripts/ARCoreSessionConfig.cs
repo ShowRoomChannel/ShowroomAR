@@ -60,7 +60,7 @@ namespace GoogleARCore
         [Tooltip("Chooses which plane finding mode will be used.")]
         [FormerlySerializedAs("EnablePlaneFinding")]
         public DetectedPlaneFindingMode PlaneFindingMode =
-            DetectedPlaneFindingMode.HorizontalAndVertical;
+            DetectedPlaneFindingMode.Horizontal;
 
         [Header("Light Estimation")]
 

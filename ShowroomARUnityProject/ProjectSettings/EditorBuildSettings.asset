@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ARScene.unity
-    guid: 094589f5bf340c4449f4fe92f2b4ddd1
-  - enabled: 0
+    path: Assets/Scenes/StartScene.unity
+    guid: 7a5550001f0e4b04f840f1c46b3366e8
+  - enabled: 1
     path: Assets/Scenes/ConventionalScene.unity
     guid: 661a6e2d644094c4bbb946c548bd97ad
+  - enabled: 1
+    path: Assets/Scenes/ArcoreScene.unity
+    guid: 094589f5bf340c4449f4fe92f2b4ddd1
+  - enabled: 0
+    path: Assets/Scenes/Test.unity
+    guid: 5e3c86de5c5227d418eb8d031e4fdbbc
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b8062ea3eb2ce9a4492cf3b0d3d264a7,
       type: 2}

@@ -87,6 +87,15 @@ namespace Lean.Touch
 				}
 
 				transform.localScale *= pinchScale;
+				float currentScale = transform.localScale.x;
+				if (currentScale > 1.0f)
+				{
+					transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+				}
+				else if (currentScale < 0.1f)
+				{
+					transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+				}
 
 				remainingScale += transform.localPosition - oldScale;
 			}

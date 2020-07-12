@@ -31,6 +31,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
 #if UNITY_EDITOR
     // Set up touch input propagation while using Instant Preview in the editor.
     using Input = InstantPreviewInput;
+    using Lean.Touch;
 #endif
 
     /// <summary>
@@ -47,6 +48,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
         public GameObject VehicleObject;
         public GameObject VehiclePrefab;
         private GameObject VehicleInstance;
+        private GameObject placementIndicatorInstance;
         public Button addButton;
         private bool isClicked;
 
@@ -54,12 +56,28 @@ namespace GoogleARCore.Examples.ObjectManipulation
         private bool isAdded;
         public Sprite addSprite;
         public Sprite resetSprite;
+
         // To move the vehicle
         private bool isMove;
 
         // For taking a picture
         public GameObject UIButtons;
         public GameObject pointCloud;
+
+        // For expanding button panel when add button is clicked
+        public GameObject addButtonGameObject;
+        public GameObject buttonPanel;
+        public GameObject[] buttonPanelGameObjects;
+
+        private bool _isVehicleActive;
+        private bool _isPlacementIndicatorActive;
+
+        public GameObject joystickObject;
+        private Joystick joystick;
+
+        public GameObject vehiclePlane;
+
+        private Dictionary<MeshRenderer, Material[]> _materialDictionary = new Dictionary<MeshRenderer, Material[]>();
 
         public void CaptureIt()
         {
@@ -125,20 +143,30 @@ namespace GoogleARCore.Examples.ObjectManipulation
             Destroy( ss );
             UIButtons.SetActive(true);
             pointCloud.SetActive(true);
-        }        
+        }
+
+        public void ResetButton()
+        {
+            isClicked = true;
+
+            placementIndicator.SetActive(true);
+            SetPlacementIndicator();
+            addButtonGameObject.SetActive(true);
+            buttonPanel.SetActive(false);
+        }
 
         public void SetClicked()
         {
             isClicked = true;
-            if (isAdded == false)
+            if (_isPlacementIndicatorActive && !_isVehicleActive)
             {
-                addButton.image.sprite = addSprite;
+                addButtonGameObject.SetActive(false);
+                buttonPanel.SetActive(true);
+                foreach (GameObject buttonsInPanel in buttonPanelGameObjects)
+                {
+                    buttonsInPanel.SetActive(true);
+                }
             }
-
-            else
-            {
-                addButton.image.sprite = resetSprite;
-            } 
         }
 
         public void onPress()
@@ -151,15 +179,39 @@ namespace GoogleARCore.Examples.ObjectManipulation
             isMove = false;
         }
 
+        private void SetPlacementIndicator()
+        {
+            if (placementIndicatorInstance != null)
+            {
+                DestroyImmediate(placementIndicatorInstance);
+            }
+            joystickObject.SetActive(false);
+            placementIndicatorInstance = Instantiate(VehiclePrefab, placementIndicator.transform.position, placementIndicator.transform.rotation);
+            placementIndicatorInstance.transform.Rotate(0, 90, 0);
+            placementIndicatorInstance.GetComponent<Rigidbody>().useGravity = false;
+            placementIndicatorInstance.GetComponent<InputManager>().joystick = joystick;
+            placementIndicatorInstance.transform.parent = placementIndicator.transform;
+            placementIndicator.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            placementIndicatorInstance.GetComponent<TurnTranslucentThenBack>().Start();
+            _materialDictionary = placementIndicatorInstance.GetComponent<TurnTranslucentThenBack>().materialDictionary;
+            placementIndicatorInstance.GetComponent<TurnTranslucentThenBack>().TurnTranslucent();
+        }
+
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
         public void Update()
         {
+            if (VehicleInstance)
+            {
+                //vehiclePlane.transform.position = VehicleInstance.transform.position;
+            }
+
             addButton.onClick.AddListener( () => isClicked = true );
             TrackableHit hit;
-            TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
-                TrackableHitFlags.FeaturePointWithSurfaceNormal;
+            //TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
+            //    TrackableHitFlags.FeaturePointWithSurfaceNormal; 
+            TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinBounds;
             //var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));    
             if (isClicked && (isAdded == true))
             {
@@ -171,19 +223,33 @@ namespace GoogleARCore.Examples.ObjectManipulation
             {
                 
                 Vector3 pt = hit.Pose.position;
+                Vector3 planePt = pt;
+                planePt.y -= 0.05f;
+                //pt.y += 0.1f;
                 var cameraForward = Camera.current.transform.forward;
                 var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
                 var rotation = Quaternion.LookRotation(cameraBearing);
+                //var rotation = Quaternion.LookRotation(Vector3.zero);
 
                 if (isMove && isAdded)
                 {
                     var sameRotation = VehicleObject.transform.rotation;
-                    VehicleObject.transform.SetPositionAndRotation(pt, sameRotation);
+                    VehicleInstance.transform.position = pt;
+                    //VehicleInstance.transform.rotation = rotation;
+                    VehicleInstance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    VehicleInstance.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                    VehicleObject.transform.position = pt;
+                    //VehicleObject.transform.rotation = rotation;
+                    VehicleObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    VehicleObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                    vehiclePlane.transform.position = planePt;
+                    //vehiclePlane.transform.rotation = rotation;
                 }
                 if (isAdded == false)
                 {
                     placementIndicator.transform.SetPositionAndRotation(pt, rotation);
                     placementIndicator.SetActive(true);
+                    _isPlacementIndicatorActive = true;
 
                     if (isClicked)
                     {
@@ -192,24 +258,42 @@ namespace GoogleARCore.Examples.ObjectManipulation
                             DestroyImmediate (VehicleInstance);
                         }
                         VehicleObject.transform.SetPositionAndRotation(pt, rotation);
+                        joystick.enabled = true;
                         var anchor = hit.Trackable.CreateAnchor(hit.Pose);
                         VehicleObject.transform.parent = anchor.transform;
                         VehicleObject.SetActive(true);
-                        VehicleInstance = Instantiate (VehiclePrefab, pt,
-                            rotation);
+                        //VehicleObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                        //VehicleInstance = Instantiate(placementIndicatorInstance, placementIndicator.transform);
+                        VehicleInstance = placementIndicatorInstance;
+                        VehicleInstance.GetComponent<Rigidbody>().useGravity = true;
                         VehicleInstance.transform.parent = VehicleObject.transform;
+                        joystickObject.SetActive(true);
+                        VehicleInstance.GetComponent<InputManager>().joystick = joystick;
+                        VehicleInstance.GetComponent<TurnTranslucentThenBack>().materialDictionary = _materialDictionary;
+                        VehicleInstance.GetComponent<TurnTranslucentThenBack>().TurnBack();
+                        VehicleInstance.AddComponent<Lean.Touch.LeanTwistRotateAxis>();
+                        VehicleInstance.AddComponent<Lean.Touch.LeanPinchScale>();
+                        //vehiclePlane.transform.SetPositionAndRotation(planePt, Quaternion.LookRotation(Vector3.zero));
+                        vehiclePlane.transform.SetPositionAndRotation(planePt, rotation);
                         isAdded = true;
                         SetClicked();
                         placementIndicator.SetActive(false);
+                        _isPlacementIndicatorActive = false;
                     }
                 }
             }
             else
             {
                 placementIndicator.SetActive(false);
+                _isPlacementIndicatorActive = false;
             }
             _UpdateApplicationLifecycle();
             isClicked = false;
+        }
+
+        private void Start()
+        {
+            VehiclePrefab = FindObjectOfType<InformationScript>().vehiclePrefab;
         }
 
         /// <summary>
@@ -217,16 +301,34 @@ namespace GoogleARCore.Examples.ObjectManipulation
         /// </summary>
         public void Awake()
         {
+            VehiclePrefab = FindObjectOfType<InformationScript>().vehiclePrefab;
+
+            joystick = joystickObject.GetComponent<Joystick>();
+
+            _isVehicleActive = false;
+
+            //placementIndicatorInstance = Instantiate(VehiclePrefab, placementIndicator.transform.position, placementIndicator.transform.rotation);
+            SetPlacementIndicator();
+
+            addButtonGameObject.SetActive(true);
+            //RectTransform buttonPanelRectangle = buttonPanel.GetComponent<RectTransform>();
+            buttonPanel.SetActive(false);
+            //foreach (GameObject button in buttonPanel.GetComponents<GameObject>())
+            //{
+            //    button.SetActive(false);
+            //}
+
             // Enable ARCore to target 60fps camera capture frame rate on supported devices.
             // Note, Application.targetFrameRate is ignored when QualitySettings.vSyncCount != 0.
             if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
             {
                 Permission.RequestUserPermission(Permission.ExternalStorageWrite);
             }
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 30;
             VehicleObject.SetActive(false);
             isClicked = false;
             isAdded = false;
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
         }
 
         /// <summary>
@@ -234,12 +336,6 @@ namespace GoogleARCore.Examples.ObjectManipulation
         /// </summary>
         private void _UpdateApplicationLifecycle()
         {
-            // Exit the app when the 'back' button is pressed.
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                Application.Quit();
-            }
-
             // Only allow the screen to sleep when not tracking.
             if (Session.Status != SessionStatus.Tracking)
             {

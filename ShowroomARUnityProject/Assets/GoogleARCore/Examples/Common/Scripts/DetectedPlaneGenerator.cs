@@ -62,6 +62,7 @@ namespace GoogleARCore.Examples.Common
                 GameObject planeObject =
                     Instantiate(DetectedPlanePrefab, Vector3.zero, Quaternion.identity, transform);
                 planeObject.GetComponent<DetectedPlaneVisualizer>().Initialize(m_NewPlanes[i]);
+                //planeObject.AddComponent<Rigidbody>();
             }
         }
     }
