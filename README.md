@@ -3,7 +3,7 @@ AR car showroom made with Unity 2019.4.0f1 and Google Arcore.
 
 ![](Media/gif1.gif)
 
-[Demo Video](https://youtu.be/LhDH1aJ32G4)
+[AR Demo Video](https://youtu.be/LhDH1aJ32G4)
 
 Credits:
 This is a non commercial project made for educational purposes,
