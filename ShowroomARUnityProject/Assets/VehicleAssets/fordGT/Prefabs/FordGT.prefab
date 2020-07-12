@@ -13452,7 +13452,7 @@ MonoBehaviour:
   steeringWheels:
   - {fileID: 3549956099595755868}
   - {fileID: 5217145884564516468}
-  strengthCoefficient: 160000
+  strengthCoefficient: 140000
   maxTurn: 20
   wheel_fLeft: {fileID: 3549956099595755869}
   wheel_fRight: {fileID: 5217145884564516469}
