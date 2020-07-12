@@ -1,5 +1,5 @@
 # ShowroomAR
-AR car showroom made with Unity and Google Arcore.
+AR car showroom made with Unity 2019.4.0f1 and Google Arcore.
 Credits:
 This is a non commercial project made for educational purposes,
 Made with Arcore SDK by Google,
