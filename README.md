@@ -1,6 +1,11 @@
 # ShowroomAR
 AR car showroom made with Unity and Google Arcore.
-Credits: https://sketchfab.com/3d-models/tesla-cybertruck-657e71b3e2ad468196668e9c9df708fb
+Credits:
+This is a non commercial project made for educational purposes,
+Made with Arcore SDK by Google,
+Icons by Google,
+[Cybertruck asset from Sketchfab by hashikemu](https://sketchfab.com/3d-models/tesla-cybertruck-657e71b3e2ad468196668e9c9df708fb),
+All trademarks and logos belong to their respective owners.
 
 Shield: [![CC BY 4.0][cc-by-shield]][cc-by]
 
