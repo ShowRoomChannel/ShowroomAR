@@ -41,7 +41,14 @@ public class CarDynamicsController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _rigidbody.mass = 2000f;
+        _rigidbody.mass = this.GetComponent<Rigidbody>().mass;
+        Vector3 currentVelocity = _rigidbody.velocity;
+
+        // Auto Break
+        if (im.throttle == 0 && _rigidbody.velocity != Vector3.zero)
+        {
+            _rigidbody.velocity -= 0.05f * currentVelocity * Time.deltaTime;
+        }
 
         foreach (WheelCollider wheel in throttleWheels)
         {

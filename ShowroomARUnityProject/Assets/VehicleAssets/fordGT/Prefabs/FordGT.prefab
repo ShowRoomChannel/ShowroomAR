@@ -13453,7 +13453,7 @@ MonoBehaviour:
   - {fileID: 3549956099595755868}
   - {fileID: 5217145884564516468}
   strengthCoefficient: 140000
-  maxTurn: 20
+  maxTurn: 25
   wheel_fLeft: {fileID: 3549956099595755869}
   wheel_fRight: {fileID: 5217145884564516469}
   wheel_rLeft: {fileID: 3855717248200371864}

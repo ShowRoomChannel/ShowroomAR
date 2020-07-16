@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0.6117647, a: 0.5019608}
+  m_Material: {fileID: 2100000, guid: 1c2a8715551d8e24dbe588d353b9f43c, type: 2}
+  m_Color: {r: 0, g: 0, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1517001445}
+  infoObject: {fileID: 0}
 --- !u!4 &379276949
 Transform:
   m_ObjectHideFlags: 0
@@ -1564,8 +1565,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0.16503906}
-  m_SizeDelta: {x: -0.000061035156, y: -0.33007812}
+  m_AnchoredPosition: {x: -2.2000122, y: 0.16503906}
+  m_SizeDelta: {x: 4.372986, y: -0.33007812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1630459447
 GameObject:
