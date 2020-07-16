@@ -224,7 +224,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 83518735}
-  - component: {fileID: 83518734}
+  - component: {fileID: 83518737}
+  - component: {fileID: 83518736}
   m_Layer: 0
   m_Name: AR Vehicle Controller
   m_TagString: Untagged
@@ -232,34 +233,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &83518734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83518733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e616f59911754ba5b89ee5cbaea6171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placementIndicator: {fileID: 1029953268}
-  VehicleObject: {fileID: 1380458698}
-  VehiclePrefab: {fileID: 0}
-  addButton: {fileID: 551692520}
-  addSprite: {fileID: 21300000, guid: f73b798a2f4421f4692c6a899830428f, type: 3}
-  resetSprite: {fileID: 21300000, guid: ae4d3fd062e0dbe44aebe2721ce9e969, type: 3}
-  UIButtons: {fileID: 1670905058}
-  pointCloud: {fileID: 1636731501}
-  addButtonGameObject: {fileID: 551692519}
-  buttonPanel: {fileID: 1572404579}
-  buttonPanelGameObjects:
-  - {fileID: 1522588733}
-  - {fileID: 628147860}
-  - {fileID: 1873549585}
-  joystickObject: {fileID: 420705845}
-  vehiclePlane: {fileID: 476900584}
 --- !u!4 &83518735
 Transform:
   m_ObjectHideFlags: 0
@@ -274,6 +247,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &83518736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83518733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550efe9983003db48b8f956b6ed90655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placementIndicator: {fileID: 1029953268}
+  VehicleObject: {fileID: 1380458698}
+  VehiclePrefab: {fileID: 0}
+  addButtonGameObject: {fileID: 551692519}
+  buttonPanel: {fileID: 1572404579}
+  joystickObject: {fileID: 420705845}
+  vehiclePlane: {fileID: 476900584}
+--- !u!114 &83518737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83518733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c81b98801af7814cac32a1ad394f366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIButtons: {fileID: 1670905058}
+  pointCloud: {fileID: 1636731501}
 --- !u!1001 &88471262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -352,6 +358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efece9fd66075b4595b3a9f26ff9c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  infoObject: {fileID: 0}
 --- !u!4 &91937696
 Transform:
   m_ObjectHideFlags: 0
@@ -815,7 +823,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 83518734}
+      - m_Target: {fileID: 83518736}
         m_MethodName: SetClicked
         m_Mode: 1
         m_Arguments:
@@ -938,7 +946,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 83518734}
+        - m_Target: {fileID: 83518736}
           m_MethodName: onPress
           m_Mode: 1
           m_Arguments:
@@ -953,7 +961,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 83518734}
+        - m_Target: {fileID: 83518736}
           m_MethodName: onRelease
           m_Mode: 1
           m_Arguments:
@@ -1682,7 +1690,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 83518734}
+      - m_Target: {fileID: 83518737}
         m_MethodName: CaptureIt
         m_Mode: 1
         m_Arguments:
@@ -2000,7 +2008,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 83518734}
+      - m_Target: {fileID: 83518736}
         m_MethodName: ResetButton
         m_Mode: 1
         m_Arguments:
