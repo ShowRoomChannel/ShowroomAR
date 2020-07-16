@@ -47,7 +47,7 @@ public class CarDynamicsController : MonoBehaviour
         // Auto Break
         if (im.throttle == 0 && _rigidbody.velocity != Vector3.zero)
         {
-            _rigidbody.velocity -= 0.05f * currentVelocity * Time.deltaTime;
+            _rigidbody.velocity -= 0.01f * currentVelocity * Time.deltaTime;
         }
 
         foreach (WheelCollider wheel in throttleWheels)
