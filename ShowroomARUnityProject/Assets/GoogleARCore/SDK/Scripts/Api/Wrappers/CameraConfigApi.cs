@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="CameraConfigApi.cs" company="Google">
+// <copyright file="CameraConfigApi.cs" company="Google LLC">
 //
 // Copyright 2018 Google LLC. All Rights Reserved.
 //
@@ -155,10 +155,6 @@ namespace GoogleARCoreInternal
             [AndroidImport(ApiConstants.ARCoreNativeApi)]
             public static extern void ArCameraConfig_getTextureDimensions(IntPtr sessionHandle,
                 IntPtr cameraConfigHandle, ref int width, ref int height);
-
-            [AndroidImport(ApiConstants.ARCoreNativeApi)]
-            public static extern void ArCameraConfig_getTextureHeight(IntPtr sessionHandle,
-                IntPtr cameraConfigHandle, ref int height);
 
             [AndroidImport(ApiConstants.ARCoreNativeApi)]
             public static extern void ArCameraConfig_getFacingDirection(

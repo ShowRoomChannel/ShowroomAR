@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="InstantPreviewManager.cs" company="Google">
+// <copyright file="InstantPreviewManager.cs" company="Google LLC">
 //
 // Copyright 2017 Google LLC. All Rights Reserved.
 //
@@ -447,7 +447,7 @@ namespace GoogleARCoreInternal
                 }
 
                 NativeApi.SendFrame(targetTexture.GetNativeTexturePtr());
-                GL.IssuePluginEvent(renderEventFunc, 1);
+                GL.IssuePluginEvent(renderEventFunc, (int)ApiRenderEvent.UpdateCubemapTexture);
             }
         }
 

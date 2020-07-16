@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="SessionApi.cs" company="Google">
+// <copyright file="SessionApi.cs" company="Google LLC">
 //
 // Copyright 2017 Google LLC. All Rights Reserved.
 //
@@ -73,7 +73,7 @@ namespace GoogleARCoreInternal
                 // Skip camera config that has a different camera facing direction.
                 DeviceCameraDirection configDirection =
                     m_NativeSession.CameraConfigApi.GetFacingDirection(cameraConfigHandle)
-                        .ToDeviceCameraDirection();
+                    .ToDeviceCameraDirection();
                 if (configDirection != cameraFacingDirection)
                 {
                     continue;
@@ -189,6 +189,14 @@ namespace GoogleARCoreInternal
                 m_NativeSession.SessionHandle, cloudAnchorId, ref cloudAnchorHandle);
         }
 
+        public bool IsDepthModeSupported(ApiDepthMode depthMode)
+        {
+            int isSupported = 0;
+            ExternApi.ArSession_isDepthModeSupported(
+                m_NativeSession.SessionHandle, depthMode, ref isSupported);
+            return isSupported != 0;
+        }
+
         private CameraConfig _CreateCameraConfig(IntPtr cameraConfigHandle)
         {
             int imageWidth = 0;
@@ -240,6 +248,10 @@ namespace GoogleARCoreInternal
             [AndroidImport(ApiConstants.ARCoreNativeApi)]
             public static extern int ArSession_acquireNewAnchor(
                 IntPtr sessionHandle, IntPtr poseHandle, ref IntPtr anchorHandle);
+
+            [AndroidImport(ApiConstants.ARCoreNativeApi)]
+            public static extern void ArSession_isDepthModeSupported(
+                IntPtr sessionHandle, ApiDepthMode depthMode, ref int isSupported);
 #pragma warning restore 626
 
             [DllImport(ApiConstants.ARCoreNativeApi)]

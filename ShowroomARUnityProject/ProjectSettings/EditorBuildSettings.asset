@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 5e3c86de5c5227d418eb8d031e4fdbbc
+  - enabled: 0
+    path: Assets/GoogleARCore/Examples/ObjectManipulation/Scenes/ObjectManipulation.unity
+    guid: 9dba7e74f4d2b410f90b920f80528d44
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b8062ea3eb2ce9a4492cf3b0d3d264a7,
       type: 2}

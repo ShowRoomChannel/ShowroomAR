@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="DetectedPlaneGenerator.cs" company="Google">
+// <copyright file="DetectedPlaneGenerator.cs" company="Google LLC">
 //
 // Copyright 2018 Google LLC. All Rights Reserved.
 //
@@ -62,7 +62,6 @@ namespace GoogleARCore.Examples.Common
                 GameObject planeObject =
                     Instantiate(DetectedPlanePrefab, Vector3.zero, Quaternion.identity, transform);
                 planeObject.GetComponent<DetectedPlaneVisualizer>().Initialize(m_NewPlanes[i]);
-                //planeObject.AddComponent<Rigidbody>();
             }
         }
     }

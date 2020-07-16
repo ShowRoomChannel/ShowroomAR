@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="PawnManipulator.cs" company="Google">
+// <copyright file="PawnManipulator.cs" company="Google LLC">
 //
 // Copyright 2019 Google LLC. All Rights Reserved.
 //
@@ -22,8 +22,6 @@ namespace GoogleARCore.Examples.ObjectManipulation
 {
     using GoogleARCore;
     using UnityEngine;
-    using UnityEngine.UI;
-    using System.Collections;
 
     /// <summary>
     /// Controls the placement of objects via a tap gesture.
@@ -40,14 +38,11 @@ namespace GoogleARCore.Examples.ObjectManipulation
         /// A prefab to place when a raycast from a user touch hits a plane.
         /// </summary>
         public GameObject PawnPrefab;
-        private GameObject PawnInstance;
-
 
         /// <summary>
         /// Manipulator prefab to attach placed objects to.
         /// </summary>
         public GameObject ManipulatorPrefab;
-        private GameObject manipulator;
 
         /// <summary>
         /// Returns true if the manipulation can be started for the given gesture.
@@ -76,16 +71,17 @@ namespace GoogleARCore.Examples.ObjectManipulation
             }
 
             // If gesture is targeting an existing object we are done.
-            /*if (gesture.TargetObject != null)
+            if (gesture.TargetObject != null)
             {
                 return;
-            }*/
+            }
 
             // Raycast against the location the player touched to search for planes.
             TrackableHit hit;
             TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon;
 
-            if (Frame.Raycast (Screen.width/2, Screen.height/2, raycastFilter, out hit))
+            if (Frame.Raycast(
+                gesture.StartPosition.x, gesture.StartPosition.y, raycastFilter, out hit))
             {
                 // Use hit pose and camera pose to check if hittest is from the
                 // back of the plane, if it is, no need to create the anchor.
@@ -97,38 +93,25 @@ namespace GoogleARCore.Examples.ObjectManipulation
                 }
                 else
                 {
-                    if (PawnInstance != null)
-                    {
-                        //DestroyImmediate (PawnInstance);
-                        //PawnInstance.transform.SetPositionAndRotation(hit.Pose.position, hit.Pose.rotation);
-                        manipulator.transform.SetPositionAndRotation(hit.Pose.position, hit.Pose.rotation);
-                        //PawnInstance.transform.parent = manipulator.transform;
-                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-                        manipulator.transform.parent = anchor.transform;
-                        manipulator.GetComponent<Manipulator>().Select();
-                    }
-                    else
-                    {    
-                        // Instantiate game object at the hit pose.
-                        PawnInstance = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
+                    // Instantiate game object at the hit pose.
+                    var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
 
-                        // Instantiate manipulator.
-                        manipulator =
-                            Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
+                    // Instantiate manipulator.
+                    var manipulator =
+                        Instantiate(ManipulatorPrefab, hit.Pose.position, hit.Pose.rotation);
 
-                        // Make game object a child of the manipulator.
-                        PawnInstance.transform.parent = manipulator.transform;
+                    // Make game object a child of the manipulator.
+                    gameObject.transform.parent = manipulator.transform;
 
-                        // Create an anchor to allow ARCore to track the hitpoint as understanding of
-                        // the physical world evolves.
-                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                    // Create an anchor to allow ARCore to track the hitpoint as understanding of
+                    // the physical world evolves.
+                    var anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
-                        // Make manipulator a child of the anchor.
-                        manipulator.transform.parent = anchor.transform;
+                    // Make manipulator a child of the anchor.
+                    manipulator.transform.parent = anchor.transform;
 
-                        // Select the placed object.
-                        manipulator.GetComponent<Manipulator>().Select();
-                    }
+                    // Select the placed object.
+                    manipulator.GetComponent<Manipulator>().Select();
                 }
             }
         }

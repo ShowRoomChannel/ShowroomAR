@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="AnchorApi.cs" company="Google">
+// <copyright file="AnchorApi.cs" company="Google LLC">
 //
 // Copyright 2017 Google LLC. All Rights Reserved.
 //
@@ -23,6 +23,7 @@ namespace GoogleARCoreInternal
     using System;
     using System.Runtime.InteropServices;
     using GoogleARCore;
+    using GoogleARCore.CrossPlatform;
     using GoogleARCoreInternal.CrossPlatform;
     using UnityEngine;
 
