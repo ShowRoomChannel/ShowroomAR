@@ -3,7 +3,7 @@ AR vehicle showroom made with Unity 2019.4.0f1 and Google Arcore.
 
 Requires an Andriod phone with Arcore ([list of compatible phones](https://developers.google.com/ar/discover/supported-devices))
 
-[Download for Android](https://github.com/fazil47/ShowroomAR/releases/tag/1.0)
+[Download for Android](https://github.com/fazil47/ShowroomAR/releases/tag/1.0.5)
 
 ![](Media/gif1.gif)
 
